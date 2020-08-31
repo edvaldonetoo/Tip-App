@@ -1,0 +1,119 @@
+	<!DOCTYPE html>
+	<html>
+	<head>
+		<title>Tip App</title>
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,600;1,500&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="style.css">
+	<script type="text/javascript" src="app.js"></script>
+
+	</head>
+	<body>
+	<main id="container">
+		<h1>Tip App</h1>
+		<section>
+			<div class="bill">
+				<label for="yourBill">Bill</label>
+				<input type="number" placeholder="Your Bill" id="yourBill" >
+			</div>
+
+			<div>
+				
+				<div class="space-between">
+					<label for="tipInput">Select tip</label>
+					<span id="tipPercent"></span>
+				</div>
+				<input type="range" value="0" id="tipInput" class="range">
+			</div>
+
+			<div class="space-between">
+				<span>Tip</span>
+				<span id="tipValue"></span>
+			</div>
+
+			<hr>
+			<div class="space-between total">
+				<span>Total</span>
+				<span id="totalWithTip"></span>
+			</div>
+		</section>
+
+		<section>
+			
+			<div>
+			<div class="space-between">
+				<label for="splitInput">Split</label>
+				<span id="splitValue"> 1 person</span>
+			</div>
+			<input type="range" min="1" max="10" value="1" id="splitInput" class="range">
+	        </div> 
+
+	        <div class="space-between">
+	        	<span>Bill each</span>
+	        	<span id="billEach"></span>
+	        </div>
+
+	        <div class="space-between">
+	        	<span>Tip each</span>
+	        	<span id="tipEach"></span>
+	        </div>
+
+
+		</section>
+
+
+	</main>
+
+	<script type="text/javascript">
+
+	// Function to format the currency
+		function formatMoney(value){
+	value = Math.ceil(value * 100) / 100;
+	value= value.toFixed(2);
+	return 'R ' + value;
+		}
+	// Function to split the bill
+	function formatSplit(value){
+		if (value==='1') return value + 'person';
+		return value + 'people';
+
+
+	}
+
+	// This function will be called everytime an input is updated
+
+	function update(){
+
+	let bill =Number(document.getElementById('yourBill').value);
+	let tipPercent = document.getElementById('tipInput').value;
+	let split = document.getElementById('splitInput').value;
+
+
+	// Calculate and display values
+
+	let tipValue = bill * (tipPercent / 100);
+	let tipEach = tipValue / split;
+	let newBillEach = (bill + tipValue ) / split;
+
+	document.getElementById('tipPercent').innerHTML = tipPercent + "%";
+
+	document.getElementById('tipValue').innerHTML = formatMoney(tipValue);
+
+	document.getElementById('totalWithTip').innerHTML =formatMoney(bill + tipValue);
+
+	document.getElementById('splitValue').innerHTML = formatSplit(split);
+
+	document.getElementById('billEach').innerHTML =formatMoney(newBillEach);
+
+	document.getElementById('tipEach').innerHTML =formatMoney(tipEach); 
+
+	}
+
+	// I could have called the update function inside the <main> tag but instead I used it here, because I like it this way.
+	let container =document.getElementById('container');
+	container.addEventListener('input',update);
+
+
+
+	</script>
+	</body>
+	</html>
