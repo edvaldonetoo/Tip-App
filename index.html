@@ -4,7 +4,9 @@
 		<title>Tip App</title>
 		<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,600;1,500&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="style.css">
-	<script type="text/javascript" src="app.js"></script>
+
+	<link rel="icon" type="image/png" href="img/icon.png">
+	
 
 	</head>
 	<body>
@@ -63,9 +65,11 @@
 
 	</main>
 
-	<script type="text/javascript">
+	</body>
+	<script>
+		
 
-	// Function to format the currency
+// Function to format the currency
 		function formatMoney(value){
 	value = Math.ceil(value * 100) / 100;
 	value= value.toFixed(2);
@@ -113,7 +117,5 @@
 	container.addEventListener('input',update);
 
 
-
-	</script>
-	</body>
+	</script>>
 	</html>
